@@ -4,16 +4,19 @@ import threading
 import time
 import pyautogui
 
-def keyboard_pressed_keys_callback(keys: List[Key],callback):
-    callback(keys)
-
 
 class Keyboard: # ctrl + c is not detected in a good way
     def __init__(self):
         self.keys_pressed = set() 
-
+        self.triggers_to_watch_for = []
     def on_press(self, key: Key):
-        self.keys_pressed.add(key)  
+        self.keys_pressed.add(key)
+        #!----------
+        for trigger in self.triggers_to_watch_for:
+            trigger.keyboard = self
+            if(trigger.check_trigger()):
+                print("trigger")
+        #!--------------------------------  
         return key
 
     def on_release(self, key: Key):
@@ -25,18 +28,12 @@ class Keyboard: # ctrl + c is not detected in a good way
         print(self.keys_pressed)
 
     def set_up_keyboard_listener(self):
-        thread = threading.Thread(target=self.view_pressed_keys)
-        thread.start()
+        
+        
         with Listener(on_press=self.on_press, on_release=self.on_release) as listener:
             listener.join()
-        thread.join()
 
     
-
-
-
-
-
 
 
 
