@@ -14,9 +14,13 @@ class Keyboard: # ctrl + c is not detected in a good way
         #!----------
         for trigger in self.triggers_to_watch_for:
             trigger.keyboard = self
-            if(trigger.check_trigger()):
+            if(trigger.check_trigger(self.keys_pressed)):
                 print("trigger")
         #!--------------------------------  
+
+
+
+
         return key
 
     def on_release(self, key: Key):

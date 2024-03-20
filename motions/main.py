@@ -8,10 +8,8 @@ import threading
 
 
 keyboard = Keyboard()
-a_b_trigger = Keys_trigger(trigger=[Key("a"),Key( "b")],Keyboard_singleton=keyboard)
+a_b_trigger = Keys_trigger(trigger=[Key("b"),Key( "a")],Keyboard_singleton=None)
 keyboard.triggers_to_watch_for.append(a_b_trigger)
-keyboard_thread = threading.Thread(target=keyboard.set_up_keyboard_listener)
-keyboard_thread.start()
-
-
-
+keyboard.keys_pressed.add('a')
+keyboard.keys_pressed.add('b')
+keyboard.set_up_keyboard_listener()

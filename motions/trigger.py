@@ -14,16 +14,24 @@ class Trigger(ABC):
         pass
 
 class Keys_trigger(Trigger):
-    def __init__(self, trigger: List[Key], Keyboard_singleton: Keyboard):
+    def __init__(self, trigger: List[Key], Keyboard_singleton: Keyboard=None):
         super().__init__(trigger)
         self.trigger = trigger
         self.keyboard = Keyboard_singleton
 
-    def check_trigger(self):
-        keys_to_listen_for = set({trigger.get_value() for trigger in self.trigger})  # Using set comprehension
-        print(keys_to_listen_for,self.keyboard.keys_pressed,keys_to_listen_for.issubset(self.keyboard.keys_pressed))
-        return keys_to_listen_for.issubset(self.keyboard.keys_pressed)
+    def check_trigger(self,current_keys=None):
+        if self.keyboard == None :
+            keys_to_listen_for = set({trigger.get_value() for trigger in self.trigger})  # Using set comprehension
+            print(keys_to_listen_for,self.keyboard.keys_pressed,keys_to_listen_for.issubset(self.keyboard.keys_pressed))
+            return keys_to_listen_for.issubset(self.keyboard.keys_pressed)
     
+        else:
+            keys_to_listen_for = set({trigger.get_value() for trigger in self.trigger})
+            print("listenimg keys",keys_to_listen_for)
+            print("current keys",current_keys)
+            return keys_to_listen_for.issubset(self.keyboard.keys_pressed)
+            
+        
     def listen_for_trigger(self): 
         while True:
             if self.check_trigger():

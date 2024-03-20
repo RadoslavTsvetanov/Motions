@@ -1,9 +1,8 @@
-a = set()
-a.add('s')
+a = set({'a','b'})
 print(a)
 
-b = set()
-b.add('s')
+b = set({'b','a'})
+
 
 print(
 a.issubset(b))
