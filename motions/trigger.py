@@ -5,6 +5,18 @@ from input_devices import Keyboard
 import threading
 import time
 
+def check_keys_appear(set1, set2): #!!!!!!!! stupid python set of types current keys does not provide the actual value but the string value -> 'a' and not a   (the representation is "'s'" and not "s")
+    print("checking",set1,set2)
+    for i in set2:
+        print("i",i)
+    
+    for element in set1:
+        #print(element[1::(len(element) -)])
+        if element not in set2:
+            return False
+    return True
+
+
 class Trigger(ABC):
     def __init__(self, trigger):
         pass
@@ -29,8 +41,10 @@ class Keys_trigger(Trigger):
             keys_to_listen_for = set({trigger.get_value() for trigger in self.trigger})
             print("listenimg keys",keys_to_listen_for)
             print("current keys",current_keys)
-            return keys_to_listen_for.issubset(self.keyboard.keys_pressed)
-            
+            # formatted_current_keys = set()
+            # for element in current_keys:
+            #     formatted_current_keys.add(element.char)
+            return keys_to_listen_for.issubset(current_keys)
         
     def listen_for_trigger(self): 
         while True:
