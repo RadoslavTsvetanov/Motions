@@ -3,22 +3,20 @@ from pynput.keyboard import Key, Listener
 import threading
 import time
 import pyautogui
-
+from motion import Motions
 
 class Keyboard: # ctrl + c is not detected in a good way
     def __init__(self):
         self.keys_pressed = set() 
-        self.triggers_to_watch_for = []
+        self.motions: Motions = Motions()
     def on_press(self, key: Key):
         self.keys_pressed.add(key)
         #!----------
-        for trigger in self.triggers_to_watch_for:
-            trigger.keyboard = self
-            if(trigger.check_trigger(self.keys_pressed)):
-                print("trigger")
         #!--------------------------------  
+        # thread = threading.Thread(target=self.motions.listen_motions,args=(self.keys_pressed,))
+        # thread.start()
 
-
+        self.motions.listen_motions(self.keys_pressed)
 
 
         return key
@@ -37,8 +35,8 @@ class Keyboard: # ctrl + c is not detected in a good way
         with Listener(on_press=self.on_press, on_release=self.on_release) as listener:
             listener.join()
 
-    
-
+    def add_to_listener(self, Motion):
+        self.motions.add_motion(Motion)
 
 
 # class InputListener:

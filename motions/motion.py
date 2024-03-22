@@ -1,5 +1,4 @@
 from typing import List
-from combination import Key_combination
 from trigger import Trigger
 from executor import Executor
 class Position:
@@ -9,14 +8,14 @@ class Position:
     
 
 class Motion:
-    def __init__(self,position: Position,Trigger: Trigger,Executor: Executor) -> None:
-        self.position = position
+    def __init__(self,Trigger: Trigger,Executor: Executor) -> None:
         self.Trigger = Trigger
         self.Executor = Executor
 
 
-    def handle_motion(self):
-        if self.Trigger.listen_for_trigger():
+    def handle_motion(self,current_keys):
+        if self.Trigger.check_trigger(current_keys):
+
             self.Executor.execute()
 
 class Motions:
@@ -26,16 +25,10 @@ class Motions:
     def add_motion(self,Motion: Motion):
         self.motions.append(Motion)
 
-    def listen_motions(self):
+    def listen_motions(self,current_keys):
         for motion in self.motions:
-            motion.handle_motion()
+            motion.handle_motion(current_keys)
 
 
-    def remove_motions(self,Motion: Motion):
+    def remove_motion(self,Motion: Motion):
         self.motions.remove(Motion)
-
-
-
-motions = Motions()
-
-motions.add_motion(Motion(Position(100,100),Trigger()))
