@@ -1,6 +1,7 @@
 from combination import Sequence,Key,HotKey,Scroll,Move_mouse_to_position,Click_on_mouse_position
 from typing import List
 from abc import ABC,abstractmethod
+import threading
 class AbstractExecutor(ABC):
     @abstractmethod
     def execute(self):
@@ -11,8 +12,12 @@ class Executor(AbstractExecutor):
         self.sequence = sequence_to_execute
     
     def execute(self):
-        for combination_item in self.sequence.key_combination:
-            combination_item.execute_key()
+        def run():
+            for combination_item in self.sequence.key_combination:
+                combination_item.execute_key()
+        print("executing")
+        thread = threading.Thread(target=run)
+        thread.start()
 
 # class CUstom_executor(AbstractExecutor):
 #     def __init__

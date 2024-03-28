@@ -10,19 +10,18 @@ class Keyboard: # ctrl + c is not detected in a good way
         self.keys_pressed = set() 
         self.motions: Motions = Motions()
     def on_press(self, key: Key):
-        self.keys_pressed.add(key)
-        #!----------
-        #!--------------------------------  
-        # thread = threading.Thread(target=self.motions.listen_motions,args=(self.keys_pressed,))
-        # thread.start()
+        if key in self.keys_pressed:
+            return
 
-        self.motions.listen_motions(self.keys_pressed)
+        self.keys_pressed.add(key)
+        self.motions.check_motions(self.keys_pressed)
 
 
         return key
 
+
     def on_release(self, key: Key):
-        self.keys_pressed.discard(key) 
+        self.keys_pressed.discard(key)
         if key == Key.esc:
             return False
 

@@ -16,13 +16,19 @@ import pyautogui
 
 keyboard = Keyboard()
 
+go_to_terminal = Motion(
+    Keys_trigger(trigger=[Key(KeyCode.from_char('y')), Key(KEYCODE.alt_l)]),
+    Executor=Executor(sequence_to_execute=Sequence([Move_mouse_to_position(position=Position(611,955)),Click_on_mouse_position()]))
+
+)
 
 click_motion = Motion(
-    Keys_trigger(trigger=[Key(KeyCode.from_char('á')),Key(KEYCODE.alt_gr)]),
-    Executor=Executor(sequence_to_execute=Sequence([Move_mouse_to_position(Position(200,200))]))
+    Keys_trigger(trigger=[Key(KeyCode.from_char('a')),Key(KEYCODE.alt_l)]),
+    Executor=Executor(sequence_to_execute=Sequence([HotKey(['alt','tab'])]))
     )
 
 print("hi2")
 keyboard.add_to_listener(click_motion)
+keyboard.add_to_listener(go_to_terminal)
 keyboard.set_up_keyboard_listener()
 print("hi")

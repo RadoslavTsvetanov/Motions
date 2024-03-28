@@ -25,7 +25,7 @@ class Motions:
     def add_motion(self,Motion: Motion):
         self.motions.append(Motion)
 
-    def listen_motions(self,current_keys):
+    def check_motions(self,current_keys):
         for motion in self.motions:
             motion.handle_motion(current_keys)
 
