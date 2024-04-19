@@ -14,9 +14,8 @@ class Keyboard: # ctrl + c is not detected in a good way
             return
 
         self.keys_pressed.add(key)
-        self.motions.check_motions(self.keys_pressed)
-
-
+        check_thread = threading.Thread(target=self.motions.check_motions, args=(self.keys_pressed,))
+        check_thread.start()
         return key
 
 

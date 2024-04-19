@@ -14,6 +14,9 @@ import pyautogui
 
 # since most special keys already do something a good key to use is the alt_ge + the alt_gr version of the key a -> á   
 
+
+
+
 keyboard = Keyboard()
 
 go_to_terminal = Motion(
@@ -25,7 +28,7 @@ go_to_terminal = Motion(
 click_motion = Motion(
     Keys_trigger(trigger=[Key(KeyCode.from_char('a')),Key(KEYCODE.alt_l)]),
     Executor=Executor(sequence_to_execute=Sequence([HotKey(['alt','tab'])]))
-    )
+)
 
 print("hi2")
 keyboard.add_to_listener(click_motion)
