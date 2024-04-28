@@ -12,6 +12,15 @@ Motions is a versatile tool designed to define triggers for executing various ac
 - **Configurable Settings**: Users have the freedom to configure settings for each motion, allowing for fine-tuning and optimization based on individual preferences.
 - **Cross-Platform Compatibility**: Motions is compatible across various operating systems, ensuring accessibility and usability for a wide range of users.
 - **Automation Capabilities**: By defining triggers for specific actions, users can automate repetitive tasks and streamline workflows, saving time and effort.
+- ** Custom motions **: even though there is a big system of motions and executors you can always define ypur own due to the easy syntax and also using the custom web server you can make all kinds of motions -> example: you can define some script or exe and add this to the custom motion options and for the trigger you can use the custom web server
+pseudo Syntax: 
+```py
+trigger: "motion_name", //will be later referenced oin the web server
+executor: "hi.exe"
+
+```
+like this whenever a req is send to this web server ( which can be automated ny a script to send a req based in a certain condition [hmm ... could be another motion] it will execute the ``` exe ``` )
+
 
 ## Getting Started:
 
@@ -51,6 +60,6 @@ To begin using Motions, follow these simple steps:
 }
 
 ```
-and it will execute the motion will the the name [ all motions could be inside a dict in whioch the name is the key and the function to execute is the value`]
+and it will execute the motion associated with the name [ all motions could be inside a dict in whioch the name is the key and the function to execute is the value`]
 
 )
