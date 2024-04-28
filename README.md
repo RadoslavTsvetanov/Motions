@@ -38,3 +38,19 @@ To begin using Motions, follow these simple steps:
 - **Cursor Movement Motion**: Configure triggers for simulating cursor movements on the screen, including options to specify the starting and ending positions, as well as the duration of the movement.
 
 - **Change in Screen Motion**: Define triggers based on changes in the screen, such as window focus changes, window size changes, or pixel color changes at specific coordinates.
+
+
+
+
+## Things To Do
+- make an event based system: set up a localhost:3000 listener on which you list6en for requests and based on the req perform a motion ( e.g. you make a motion to execute and it executes whenever a req is recieved on certain url and could be made with the following syntax -> 
+```json  
+{
+    motion_name: "placeholder",
+    passowrd: "placeholder"
+}
+
+```
+and it will execute the motion will the the name [ all motions could be inside a dict in whioch the name is the key and the function to execute is the value`]
+
+)

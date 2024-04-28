@@ -109,7 +109,28 @@ class Move_mouse_to_position(Sequence_item):
     def get_value(self):
         return self.position
 
+class Hold_key(Sequence_item):
+    def __init__(self,key):
+        self.key = key
     
+    def execute_key(self):
+        print("key down")
+        pyautogui.keyDown(self.key)
+
+    def get_value(self):
+        return self.key
+    
+class Release_key(Sequence_item):
+    def __init__(self,key):
+        self.key = key
+
+    def execute_key(self):
+        pyautogui.keyUp(self.key)
+
+
+    def get_value(self):
+        return self.key
+
 class Sequence:
     def __init__(self, key_combination: List[Sequence_item]):
         self.key_combination = key_combination

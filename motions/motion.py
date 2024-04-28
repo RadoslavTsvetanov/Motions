@@ -1,6 +1,7 @@
 from typing import List
 from trigger import Trigger
 from executor import Executor
+import threading
 class Position:
     def __init__(self,x,y):
         self.x = x
@@ -27,7 +28,8 @@ class Motions:
 
     def check_motions(self,current_keys):
         for motion in self.motions:
-            motion.handle_motion(current_keys)
+            motion_wrapper = motion.handle_motion(current_keys)
+            (threading.thread(target=motion_wrapper)).start()
 
 
     def remove_motion(self,Motion: Motion):

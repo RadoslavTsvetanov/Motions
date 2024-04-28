@@ -36,6 +36,9 @@ class Keyboard: # ctrl + c is not detected in a good way
     def add_to_listener(self, Motion):
         self.motions.add_motion(Motion)
 
+    def clear_keys(self): 
+        self.keys_pressed = []
+
 
 # class InputListener:
 #     def __init__(self,Keyboard: Keyboard) -> None:

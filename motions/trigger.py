@@ -10,7 +10,6 @@ def check_keys_appear(set1, set2): #!!!!!!!! stupid python set of types current 
         print("i",i)
     
     for element in set1:
-        #print(element[1::(len(element) -)])
         if element not in set2:
             return False
     return True
