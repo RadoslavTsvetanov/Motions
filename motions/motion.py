@@ -15,7 +15,7 @@ class Motion:
 
 
     def handle_motion(self,current_keys):
-        if self.Trigger.check_trigger(current_keys):
+        if self.Trigger.check_trigger(current_keys): # check implamnatation since its probs firing in another thread and ytou should know that if debugging
 
             self.Executor.execute()
 

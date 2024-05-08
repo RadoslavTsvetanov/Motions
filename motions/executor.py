@@ -1,40 +1,31 @@
-from combination import Sequence,Key,HotKey,Scroll,Move_mouse_to_position,Click_on_mouse_position
-from typing import List
-from abc import ABC,abstractmethod
+from combination import Sequence, Key, HotKey, Scroll
 import threading
+from abc import ABC, abstractmethod
+
 class AbstractExecutor(ABC):
     @abstractmethod
-    def execute(self):
+    def run(self):
         pass
 
-class Executor(AbstractExecutor):
-    def __init__(self,sequence_to_execute: Sequence): #* if you only want a single thing to execute just pass an arr with one element
-        self.sequence = sequence_to_execute
-    
-    def execute(self):
-        def run():
-            for combination_item in self.sequence.key_combination:
-                combination_item.execute_key()
-        print("executing")
-        thread = threading.Thread(target=run)
+    def execute(self): #TODO ask if potential problem will be that it wont keep order of operations since if it fires ine operation and then other of the other is shorter the shorter will be executed first. Potential fix is to reduce the multithreading part to just making a listening thread and executing thread 
+        thread = threading.Thread(target=self.run)
+        print("Executing...")
         thread.start()
 
-# class CUstom_executor(AbstractExecutor):
-#     def __init__
+class Executor(AbstractExecutor):
+    def __init__(self, sequence_to_execute: Sequence):
+        self.sequence = sequence_to_execute
 
+    def run(self):
+        for combination_item in self.sequence.key_combination:
+            combination_item.execute_key()
+        print("Execution completed.")
 
+class ExeExecutor(AbstractExecutor):
+    def __init__(self, exe_name):
+        self.exe_name = exe_name
 
-# key1 = Key('ctrl')
-# key2 = Key('c')
-# hotkey = HotKey(['ctrl', 'shift', 't'])
-# scroll_up = Scroll('up', 1)
-# scroll_down = Scroll('down', -1)
-
-# # Create a sequence
-# sequence = Sequence([key1, key2, hotkey, scroll_up, scroll_down])
-
-# # Create an executor
-# executor = Executor(sequence)
-
-# # Execute the combination
-# executor.execute()
+    def run(self):
+        # Logic to execute the executable
+        print(f"Executing {self.exe_name}...")
+        print("Execution completed.")

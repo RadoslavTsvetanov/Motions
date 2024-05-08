@@ -23,6 +23,18 @@ class Trigger(ABC):
     def check_trigger(self):
         pass
 
+class Web_Trigger:
+
+    # @param trigger name -> since the way the web_trigger works is listening for requests at certain port we need to idefntify each trigger with a `name` which is unique so that we can trigger the correct event 
+    def __init__(self, trigger_name):
+        self.trigger_name = trigger_name
+
+
+    def check_triger(self, name):
+        if (name == self.trigger_name):
+            return True # might be better to use a hashmap on the server, see comments on server.py for more info
+            
+
 class Keys_trigger(Trigger):
     def __init__(self, trigger: List[Key]):
         super().__init__(trigger)
