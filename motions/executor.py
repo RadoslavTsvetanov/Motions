@@ -1,7 +1,7 @@
 from combination import Sequence, Key, HotKey, Scroll
 import threading
 from abc import ABC, abstractmethod
-
+import subprocess
 class AbstractExecutor(ABC):
     @abstractmethod
     def run(self):
@@ -22,10 +22,20 @@ class Executor(AbstractExecutor):
         print("Execution completed.")
 
 class ExeExecutor(AbstractExecutor):
-    def __init__(self, exe_name):
-        self.exe_name = exe_name
+    def __init__(self, command_to_execute):
+        self.command_to_execute = command_to_execute
 
     def run(self):
-        # Logic to execute the executable
-        print(f"Executing {self.exe_name}...")
-        print("Execution completed.")
+        try:
+            subprocess.run(self.command_to_execute, shell=True, check=True)
+            print("Executable executed successfully.")
+        except subprocess.CalledProcessError as e:
+            print(f"Error executing executable: {e}")
+
+
+
+
+# exexe = ExeExecutor("node ./motions/index.js")
+
+
+# exexe.run()

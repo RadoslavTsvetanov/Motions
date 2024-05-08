@@ -1,0 +1,4 @@
+**THINGS to ask**
+
+- should i use udp instead of tcp/ip since i dont really need reliability and speed is the most important in this case ( ask if this is overengineering). also we dont really need the ip connection and tracking since it will run on localhost
+- how seperate as entitites should motions be since there are two options: fully independendent - you give to the motion to what to listen for ( for example insatad of key_motions to be inside the keyboard you give a reference to the keybiard to them, but then there is a problem of when to check without the use of pooling since pooling so much will kill my pc `:(` ); you give the motions to the respectitive trigger providing entity and there you can even use a hashmap to achieve constant lookup time instead of checking every motion every time but it will couple them a bit more
