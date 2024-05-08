@@ -63,3 +63,12 @@ To begin using Motions, follow these simple steps:
 and it will execute the motion associated with the name [ all motions could be inside a dict in whioch the name is the key and the function to execute is the value`]
 
 )
+## More about custom/web Motions
+- easy way to add custom functionality
+
+    ### How to use it
+    - a web server is running a localhost:port  # you can condfigure by def it will be 5556
+
+    - you send requests to it on this port with the name of the motion included
+
+    - example usage: you make a script which detects if the chat.openai.com is on the screen and if it detects it it sends a  get req (could be made into post so that you can include aditional info) and on the other side you define a custom executable which closes the browser. So like that whenever the you script it a sends a req to `http:localhost:3000/close-gpt` this gets detected aand the exe you have specified closes the tab. Benefit of this is that you can use two different languages
