@@ -47,7 +47,7 @@ class Keys_trigger(Trigger):
         print("current keys",current_keys)
         return keys_to_listen_for.issubset(current_keys)
         
-#---------------------------------------------------
+# #---------------------------------------------------
 # KEYBOARD = Keyboard()
 # # keyboard_thread = threading.Thread(target=KEYBOARD.set_up_keyboard_listener)
 # # keyboard_thread.start()

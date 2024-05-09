@@ -77,7 +77,7 @@ class Scroll(Sequence_item):
         return self.value
     
 
-class Click_on_mouse_position(Sequence_item): #TODO in the future to make it so that in inherets or implemnts a base click class and this just clicks on the mouse pos coordinates, the additional functionality before clicking might be done by passing a calback which excutes before click
+class Click_on_mouse_position(Sequence_item): 
     def __init__(self):
         self.type = SEQUENCE_ITEM_TYPES.CLICK
 

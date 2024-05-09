@@ -4,15 +4,49 @@ import executor
 from trigger import Keys_trigger
 from combination import Key
 from motion import Motion, Motions
-from executor import Executor
+from executor import Executor,ExeExecutor
 import threading
 import time
 from pynput.keyboard import KeyCode,Key as KEYCODE
 import pyautogui
-# keyboard = Keyboard()
-# alt_r_trigger = Keys_trigger([Key('a'), Key('b')],Keyboard_singleton=None)
+from server import udp_server,MyHandler
 
-# since most special keys already do something a good key to use is the alt_ge + the alt_gr version of the key a -> á   
+new_motion = Motion(Trigger=None,Executor=ExeExecutor("node motions/index.js"))
+new_motion.execute()
+
+
+example_handler = MyHandler([new_motion])
+
+
+udp_server(example_handler)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# keyboard = Keyboard()
+# # alt_r_trigger = Keys_trigger([Key('a'), Key('b')],Keyboard_singleton=None)
+
+# # since most special keys already do something a good key to use is the alt_ge + the alt_gr version of the key a -> á   
 
 
 
@@ -39,9 +73,6 @@ import pyautogui
 #     pyautogui.keyDown('alt')
 
 
-
-
-
 # print("hi2")
 # keyboard.add_to_listener(double_alt_tab)
 # keyboard.add_to_listener(go_to_terminal)
@@ -49,24 +80,7 @@ import pyautogui
 # keyboard.set_up_keyboard_listener()
 # print("hi")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-motions = Motions()
-
-
-
-
+# motions = Motions()
 
 
 

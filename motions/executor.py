@@ -35,7 +35,7 @@ class ExeExecutor(AbstractExecutor):
 
 
 
-# exexe = ExeExecutor("node ./motions/index.js")
+exexe = ExeExecutor("node ./motions/index.js")
 
 
-# exexe.run()
+exexe.run()
