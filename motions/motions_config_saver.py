@@ -6,7 +6,13 @@ from combination import Key
 from combination import Sequence,Key,HotKey,Scroll,Move_mouse_to_position,Click_on_mouse_position,Position,Custom,Hold_key,Release_key
 from enum import Enum
 from pynput.keyboard import KeyCode,Key as KEYCODE
+from custom_keys import custom_keys
 
+def get_value_from_dict_without_possible_exception(dict,key):
+    try:
+        return  dict[key]    
+    except Exception:
+        return None
 """ 
 
 {
@@ -40,14 +46,25 @@ class motion_type_for_config:
 
 
 
-def motion_factory(motion_data: motion_type_for_config):  
-
+def motion_factory(motion_data: motion_type_for_config) -> Motion | None:  
+    print(motion_data)
     #!--- for now implemenatation for just keys trigger with key executor
     try:
-        new_trigger = triggerTrigger.Keys_trigger(*(motion_data.trigger.keys))
+        trigger_arr = []
+        for trigger in motion_data["trigger"]["data"]:
+            new_key = get_value_from_dict_without_possible_exception(custom_keys,trigger)
+            print(new_key)
+            if new_key is None:
+                new_key =  KeyCode.from_char(trigger)
+                trigger_arr.append(Key(new_key))
+            else:
+                trigger_arr.append(Key(new_key))
+        
+        new_trigger = triggerTrigger.Keys_trigger(trigger=trigger_arr)
         new_executor = executorExecutor.Executor(sequence_to_execute=Sequence([]))
         return Motion(Trigger=new_trigger,Executor=new_executor)
-    except:
+    except Exception as e:
+        print(e)
         return None
     
 
@@ -93,13 +110,20 @@ class Config:
 config = Config("./config.json")
 
 
-print(config.load_config())
 
 
 
-
-config.add_motion({
-    "type":"custom",
-    "trigger":"hui",
-    "executor":"./index.js" 
+new_motion = motion_factory({
+    "motion_type":1,
+    "executor":{
+        "type":1,
+        "data":"" 
+    },
+    "trigger":{
+        "type":1,
+        "data":["down","a"]
+    }
 })
+
+
+new_motion.Trigger.debug()

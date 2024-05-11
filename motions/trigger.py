@@ -23,14 +23,18 @@ class Trigger(ABC):
     def check_trigger(self):
         pass
 
-class Web_Trigger:
+    @abstractmethod
+    def debug(self):
+        pass
+
+class Web_Trigger(Trigger):
 
     # @param trigger name -> since the way the web_trigger works is listening for requests at certain port we need to idefntify each trigger with a `name` which is unique so that we can trigger the correct event 
     def __init__(self, trigger_name):
         self.trigger_name = trigger_name
 
 
-    def check_triger(self, name):
+    def check_trigger(self, name):
         if (name == self.trigger_name):
             return True # might be better to use a hashmap on the server, see comments on server.py for more info
             
@@ -47,6 +51,10 @@ class Keys_trigger(Trigger):
         print("current keys",current_keys)
         return keys_to_listen_for.issubset(current_keys)
         
+    
+    def debug(self):
+        keys_to_listen_for = set({trigger.get_value() for trigger in self.trigger})
+        print("listenimg keys",keys_to_listen_for)
 # #---------------------------------------------------
 # KEYBOARD = Keyboard()
 # # keyboard_thread = threading.Thread(target=KEYBOARD.set_up_keyboard_listener)

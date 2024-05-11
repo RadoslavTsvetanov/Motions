@@ -1,10 +1,17 @@
 {
   "hi": "hi",
+  "format_to_follow": {
+    "allowed_entity_types": ""
+  },
   "motions": [
     {
       "motion_type": 1,
       "executor": {
         "entity_type": 1
+      },
+      "trigger": {
+        "entity_type": 1,
+        "data": []
       }
     }
   ]
