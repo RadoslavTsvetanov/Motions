@@ -7,7 +7,7 @@ from combination import Sequence,Key,HotKey,Scroll,Move_mouse_to_position,Click_
 from enum import Enum
 from pynput.keyboard import KeyCode,Key as KEYCODE
 from custom_keys import custom_keys
-
+factories = dict()
 def get_value_from_dict_without_possible_exception(dict,key):
     try:
         return  dict[key]    
@@ -36,11 +36,11 @@ class ENTITIES_TYPES(Enum):
 
 class Entity:
     entity_type: ENTITIES_TYPES
-    data: object
+    data: list
 
 
 class motion_type_for_config:
-    motion_type: ENTITIES_TYPES # name is a bit stupid since just type is a reserved word
+    motion_type: ENTITIES_TYPES # name is a bit stupid since just type is a reservese4rrrrd word
     executor: Entity
     trigger: Entity
 
@@ -111,19 +111,20 @@ config = Config("./config.json")
 
 
 
-
-
 new_motion = motion_factory({
-    "motion_type":1,
-    "executor":{
-        "type":1,
-        "data":"" 
+    "motion_type": 1,
+    "executor": {
+        "type": 1,
+        "data": [
+            {"type": "hold","data": "{}"}
+            ] 
     },
-    "trigger":{
-        "type":1,
-        "data":["down","a"]
+    "trigger": {
+        "type": 1,
+        "data": ["down", "a"]
     }
 })
+
 
 
 new_motion.Trigger.debug()

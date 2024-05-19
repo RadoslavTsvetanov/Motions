@@ -136,5 +136,12 @@ class Sequence:
         self.key_combination = key_combination
 
 
-move_mouse = Move_mouse_to_position(Position(100,100))
-move_mouse.execute_key()
+combination_factories = dict()
+combination_factories["hold"] = lambda x: Hold_key(x)
+combination_factories["key"] = lambda x: Key(x)
+combination_factories["scroll"] = lambda scroll_type, value: Scroll(scroll_type, value)
+combination_factories["hot_key"] = lambda keys: HotKey(keys)
+combination_factories["click_on_mouse_position"] = lambda: Click_on_mouse_position()
+combination_factories["click_on_position"] = lambda position: Click_on_position(position)
+combination_factories["move_mouse_to_position"] = lambda position: Move_mouse_to_position(position)
+combination_factories["custom"] = lambda callback: Custom(callback)

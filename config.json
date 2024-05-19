@@ -7,11 +7,12 @@
     {
       "motion_type": 1,
       "executor": {
-        "entity_type": 1
+        "entity_type": 1,
+        "data": [""]
       },
       "trigger": {
         "entity_type": 1,
-        "data": []
+        "data": ["a", "down"]
       }
     }
   ]
